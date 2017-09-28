@@ -14,6 +14,7 @@
 				type="preRenderView" />
 		</f:metadata>
 
+
 		<h:form>
 			<h1>Novo produto</h1>
 
@@ -24,6 +25,7 @@
 					<p:button value="Novo" outcome="/produtos/CadastroProduto" />
 					<p:commandButton value="Salvar" id="botaoSalvar"
 						action="#{cadastroProdutoBean.salvar}" />
+
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Pesquisa" outcome="/produtos/PesquisaProdutos" />
@@ -58,12 +60,14 @@
 				<p:inputText id="valorUnitario" size="10" maxlength="10"
 					styleClass="moeda"
 					value="#{cadastroProdutoBean.produto.valorUnitario}">
+
 					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
 				</p:inputText>
 
 				<p:outputLabel value="Estoque" for="estoque" />
 				<p:inputText id="estoque" size="10" maxlength="5"
 					value="#{cadastroProdutoBean.produto.quantidadeEstoque}" />
+
 			</p:panelGrid>
 		</h:form>
 	</ui:define>

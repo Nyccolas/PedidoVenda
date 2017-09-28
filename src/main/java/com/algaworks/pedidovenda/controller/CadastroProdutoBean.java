@@ -1,11 +1,14 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
+
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
 
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
@@ -34,7 +37,12 @@ public class CadastroProdutoBean implements Serializable {
 		categoriasRaizes = categorias.raizes();
 	}
 	
+
 	public void salvar() {
+	}
+
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public Produto getProduto() {
@@ -46,3 +54,4 @@ public class CadastroProdutoBean implements Serializable {
 	}
 	
 }
+

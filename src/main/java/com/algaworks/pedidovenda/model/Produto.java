@@ -76,8 +76,8 @@ public class Produto implements Serializable {
 
 	@NotNull
 	@Min(0)
-	@Max(value = 9999, message = "tem um valor muito alto")
-	@Column(name = "quantidade_estoque", nullable = false, length = 5)
+	@Max(value = 9999)
+	@Column(name = "quantidade_estoque", nullable = false, length = 4)
 	public Integer getQuantidadeEstoque() {
 		return quantidadeEstoque;
 	}
