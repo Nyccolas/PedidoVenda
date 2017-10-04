@@ -1,6 +1,7 @@
 package com.algaworks.pedidovenda.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -11,6 +12,8 @@ import javax.validation.constraints.NotNull;
 import com.algaworks.pedidovenda.model.Categoria;
 import com.algaworks.pedidovenda.model.Produto;
 import com.algaworks.pedidovenda.repository.Categorias;
+import com.algaworks.pedidovenda.service.CadastroProdutoService;
+import com.algaworks.pedidovenda.util.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -21,23 +24,39 @@ public class CadastroProdutoBean implements Serializable {
 	@Inject
 	private Categorias categorias;
 	
+	@Inject
+	private CadastroProdutoService cadastroProdutoService;
+	
 	private Produto produto;
 	private Categoria categoriaPai;
 	
 	private List<Categoria> categoriasRaizes;
+	private List<Categoria> subcategorias;
 	
 	public CadastroProdutoBean() {
-		produto = new Produto();
+		limpar();
 	}
 	
 	public void inicializar() {
-		System.out.println("Inicializando...");
-		
-		categoriasRaizes = categorias.raizes();
+		if (FacesUtil.isNotPostback()) {
+			categoriasRaizes = categorias.raizes();
+		}
+	}
+	
+	public void carregarSubcategorias() {
+		subcategorias = categorias.subcategoriasDe(categoriaPai);
+	}
+	
+	private void limpar() {
+		produto = new Produto();
+		categoriaPai = null;
+		subcategorias = new ArrayList<>();
 	}
 	
 	public void salvar() {
-		System.out.println("Categoria pai selecionada: " + categoriaPai.getDescricao());
+	produto  =	cadastroProdutoService.salvar(produto);
+	
+	FacesUtil.addInfoMessage("Produto Salvo");
 	}
 
 	public Produto getProduto() {
@@ -56,5 +75,9 @@ public class CadastroProdutoBean implements Serializable {
 	public void setCategoriaPai(Categoria categoriaPai) {
 		this.categoriaPai = categoriaPai;
 	}
-	
+
+	public List<Categoria> getSubcategorias() {
+		return subcategorias;
+	}
+
 }
