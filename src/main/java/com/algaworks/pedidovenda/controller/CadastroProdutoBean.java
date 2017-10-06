@@ -40,6 +40,10 @@ public class CadastroProdutoBean implements Serializable {
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
 			categoriasRaizes = categorias.raizes();
+			
+			if (this.categoriaPai != null) {
+				carregarSubcategorias();
+			}
 		}
 	}
 	
@@ -57,11 +61,19 @@ public class CadastroProdutoBean implements Serializable {
 		this.produto = cadastroProdutoService.salvar(this.produto);
 		limpar();
 		
-		FacesUtil.addInfoMessage("Produto salvo!");
+		FacesUtil.addInfoMessage("Produto salvo com sucesso!");
 	}
 
 	public Produto getProduto() {
 		return produto;
+	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
+		
+		if (this.produto != null) {
+			this.categoriaPai = this.produto.getCategoria().getCategoriaPai();
+		}
 	}
 
 	public List<Categoria> getCategoriasRaizes() {
@@ -79,6 +91,10 @@ public class CadastroProdutoBean implements Serializable {
 
 	public List<Categoria> getSubcategorias() {
 		return subcategorias;
+	}
+	
+	public boolean isEditando() {
+		return this.produto.getId() != null;
 	}
 
 }
