@@ -12,14 +12,13 @@
 
 	<dependencies>
 		
-		<!-- Abstração para envio de e-mails 
-		 
+		<!-- Abstração para envio de e-mails -->
 		<dependency>
 			<groupId>com.outjected</groupId>
 			<artifactId>simple-email</artifactId>
-			<version>0.2.1</version>
+			<version>0.2.5-SNAPSHOT</version>
 			<scope>compile</scope>
-		</dependency> -->
+		</dependency>
 		
 		<!-- Requerido para envio de e-mails -->
 		<dependency>
